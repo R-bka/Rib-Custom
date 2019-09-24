@@ -1,0 +1,183 @@
+REG = {}
+
+
+
+-- Ankulua
+
+SIMILAR = 0.8
+
+WIDTH = 720
+
+HEIGHT = 1280
+
+
+--Sets root folder structure(so that it runs from whatever folder your script is ran from.
+
+ROOT = scriptPath()
+
+
+
+--Sets a custom path for my images folder, make sure your imagename.png is in your images folder
+
+DIR_IMAGES = ROOT .. "images/"
+
+DIR_LIBS = ROOT .. "libs/"
+
+setImagePath(DIR_IMAGES)
+
+
+
+-- Ankulua settings
+
+-- ---------------------------------------
+
+Settings:setCompareDimension(true, WIDTH)
+
+Settings:setScriptDimension(true, WIDTH)
+
+Settings:set("MinSimilarity", SIMILAR)
+
+
+
+--
+
+--this a collection of functions from ankulua members, it will pre-load and add a lot of extra/common functions for us to use.
+
+--
+
+
+
+luaLib = loadstring(httpGet("https://raw.githubusercontent.com/mercobots/luaLib/master/luaLib.lua"))
+
+luaLib()
+
+
+
+commonLib = loadstring(httpGet("https://raw.githubusercontent.com/AnkuLua/commonLib/master/commonLib.lua"))
+
+commonLib()
+
+
+
+
+
+--be sure to set your Region(x,y,h,w) according to where YOU need to locate image.
+
+REG.image = {
+
+    image_region = Region(244, 12, 466, 1262),
+    image_region2 = Region(432, 811, 246, 85),
+    image_region3 = Region(490, 1180, 200, 78),
+    image_region5 =  Region(206, 810, 307, 113),
+}
+
+
+
+
+function joinrally()
+
+    if REG.image.image_region:existsClick("bos1.png", 5) then
+
+        if REG.image.image_region:exists("join.png") then
+
+            if REG.image.image_region:click("join.png") then
+
+                return false
+
+            end
+
+        else keyevent(4)
+
+            return true
+
+        end
+
+    end
+
+
+end
+
+function joinrally2()
+
+    if REG.image.image_region2:existsClick("bos1.png", 5) then
+        if REG.image.image_region:existsClick("join.png", 4) then do rallyset()
+        end
+        else do joinrally3()
+        end
+        end
+    end
+end
+
+function joinrally3()
+
+    if REG.image.image_region3:existsClick("bos3.png", 5) then
+        if REG.image.image_region:existsClick("join.png", 4) then do rallyset()
+        end
+        else do joinrally()
+
+        end
+        end
+    end
+end
+
+
+function rallyset()
+
+    if REG.image.image_region:existsClick ("prst.png", 2) then
+
+        if REG.image.image_region:click("mrch.png") then
+
+            if REG.image.image_region:existsClick("stmyes.png", 2) then
+
+                do stam()
+
+                end
+
+            else if REG.image.image_region:click("acm.png") then
+
+                if REG.image.image_region:click("war.png") then
+
+                    return true
+
+                end
+
+            end
+
+            end
+
+        end
+
+     end
+
+end
+
+function stam()
+
+    if REG.image.image_region:existsClick("stm100.png", 2) then
+
+        if REG.image.image_region5:existsClick("stmus.png", 2)then
+
+            if REG.image.image_region:click("acm.png") then
+
+                if REG.image.image_region:click("war.png") then
+
+                    return true
+
+                end
+
+            end
+
+        end
+
+    end
+
+end
+    -----Main Script Start-----
+
+while true do
+    joinrally()
+    while false do
+        rallyset()
+    end
+
+end
