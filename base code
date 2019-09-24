@@ -68,7 +68,10 @@ REG.image = {
     image_region = Region(244, 12, 466, 1262),
     image_region2 = Region(432, 811, 246, 85),
     image_region3 = Region(490, 1180, 200, 78),
-    image_region5 =  Region(206, 810, 307, 113),
+    image_region4 = Region(354, 700, 242, 105),
+    image_region5 = Region(488,1108, 124, 111),
+    image_region6 = Region(209 , 809, 300, 118),
+    image_region7 = Region(0,0,100,107),
 }
 
 
@@ -78,46 +81,54 @@ function joinrally()
 
     if REG.image.image_region:existsClick("bos1.png", 5) then
 
-        if REG.image.image_region:exists("join.png") then
+        if REG.image.image_region:existsClick("join.png", 2) then
 
-            if REG.image.image_region:click("join.png") then
+            return rallyset()
 
-                return false
+        else REG.image.image_region7:existsClick("back.png")
 
-            end
-
-        else keyevent(4)
-
-            return true
+            return joinrally2()
 
         end
 
     end
-
 
 end
 
 function joinrally2()
 
     if REG.image.image_region2:existsClick("bos1.png", 5) then
-        if REG.image.image_region:existsClick("join.png", 4) then do rallyset()
+
+        if REG.image.image_region:existsClick("join.png", 2) then
+
+            return rallyset()
+
+        else REG.image.image_region7:existsClick("back.png")
+
+            return joinrally3()
+
         end
-        else do joinrally3()
-        end
-        end
+
     end
+
 end
 
 function joinrally3()
 
     if REG.image.image_region3:existsClick("bos3.png", 5) then
-        if REG.image.image_region:existsClick("join.png", 4) then do rallyset()
-        end
-        else do joinrally()
+
+        if REG.image.image_region:existsClick("join.png", 2) then
+
+            return rallyset()
+
+        else REG.image.image_region7:existsClick("back.png")
+
+            return precheck()
 
         end
-        end
+
     end
+
 end
 
 
@@ -127,7 +138,7 @@ function rallyset()
 
         if REG.image.image_region:click("mrch.png") then
 
-            if REG.image.image_region:existsClick("stmyes.png", 2) then
+            if REG.image.image_region4:existsClick("confirmstm.png", 2) then
 
                 do stam()
 
@@ -137,7 +148,7 @@ function rallyset()
 
                 if REG.image.image_region:click("war.png") then
 
-                    return true
+                    return joinrally()
 
                 end
 
@@ -151,17 +162,38 @@ function rallyset()
 
 end
 
+function precheck()
+    if REG.image.image_region:existsclick("acm.png", 2) then
+
+        if REG.image.image_region:existsclick("war.png", 2) then
+
+            return joinrally()
+
+        end
+
+    end
+
+end
+
 function stam()
 
-    if REG.image.image_region:existsClick("stm100.png", 2) then
+    if REG.image.image_region5:existsClick("usestm.png", 2) then
 
-        if REG.image.image_region5:existsClick("stmus.png", 2)then
+        if REG.image.image_region6:existsClick("usestm2.png", 2)then
 
-            if REG.image.image_region:click("acm.png") then
+            if REG.image.image_region7:existsClick("back.png") then
 
-                if REG.image.image_region:click("war.png") then
+                if REG.image.image_region:click("march.png") then
 
-                    return true
+                    if REG.image.image_region:click("acm.png") then
+
+                        if REG.image.image_region:click("war.png") then
+
+                            return joinrally()
+
+                        end
+
+                    end
 
                 end
 
@@ -172,12 +204,7 @@ function stam()
     end
 
 end
-    -----Main Script Start-----
-
+-----Main Script Start-----
 while true do
     joinrally()
-    while false do
-        rallyset()
-    end
-
 end
