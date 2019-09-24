@@ -79,51 +79,51 @@ REG.image = {
 
 function joinrally()
 
-    if REG.image.image_region:existsClick("bos1.png", 5) then
+    if REG.image.image_region:existsClick("bos1.png", 1) then
 
-        if REG.image.image_region:existsClick("join.png", 2) then
+        if REG.image.image_region:existsClick("join.png", 1) then
 
-            return rallyset()
+            rallyset()
 
-        else REG.image.image_region7:existsClick("back.png")
-
-            return joinrally2()
+        else keyevent(4) joinrally2()
 
         end
 
     end
 
 end
+
 
 function joinrally2()
 
-    if REG.image.image_region2:existsClick("bos1.png", 5) then
+    if REG.image.image_region2:existsClick("bos1.png", 1) then
 
-        if REG.image.image_region:existsClick("join.png", 2) then
+        if REG.image.image_region:waitClick("join.png", 1) then
 
-            return rallyset()
+            rallyset()
 
         else REG.image.image_region7:existsClick("back.png")
 
-            return joinrally3()
+            keyevent(4) joinrally3()
 
         end
 
     end
 
 end
+
 
 function joinrally3()
 
-    if REG.image.image_region3:existsClick("bos3.png", 5) then
+    if REG.image.image_region3:existsClick("bos3.png", 1) then
 
-        if REG.image.image_region:existsClick("join.png", 2) then
+        if REG.image.image_region:waitClick("join.png", 1) then
 
-            return rallyset()
+            rallyset()
 
         else REG.image.image_region7:existsClick("back.png")
 
-            return precheck()
+            keyevent(4) joinrally()
 
         end
 
@@ -131,14 +131,13 @@ function joinrally3()
 
 end
 
-
 function rallyset()
 
-    if REG.image.image_region:existsClick ("prst.png", 2) then
+    if REG.image.image_region:click("prst.png") then
 
         if REG.image.image_region:click("mrch.png") then
 
-            if REG.image.image_region4:existsClick("confirmstm.png", 2) then
+            if REG.image.image_region4:waitClick("confirmstm.png", 2) then
 
                 do stam()
 
@@ -148,26 +147,13 @@ function rallyset()
 
                 if REG.image.image_region:click("war.png") then
 
-                    return joinrally()
+                    joinrally()
 
                 end
 
             end
 
             end
-
-        end
-
-     end
-
-end
-
-function precheck()
-    if REG.image.image_region:existsclick("acm.png", 2) then
-
-        if REG.image.image_region:existsclick("war.png", 2) then
-
-            return joinrally()
 
         end
 
@@ -189,7 +175,7 @@ function stam()
 
                         if REG.image.image_region:click("war.png") then
 
-                            return joinrally()
+                            joinrally()
 
                         end
 
